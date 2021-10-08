@@ -61,6 +61,26 @@
       integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ"
       crossorigin="anonymous"
     ></script>
+    <script
+      src="https://cdn.onesignal.com/sdks/OneSignalSDK.js"
+      async=""
+    ></script>
+    <script>
+      var OneSignal = window.OneSignal || [];
+      var initConfig = {
+        appId: "0e7468fd-cf9c-4079-8af1-99e3fc4069de",
+        notifyButton: {
+          enable: true,
+        },
+      };
+      OneSignal.push(function () {
+        OneSignal.SERVICE_WORKER_PARAM = { scope: "/push/onesignal/" };
+        OneSignal.SERVICE_WORKER_PATH = "push/onesignal/OneSignalSDKWorker.js";
+        OneSignal.SERVICE_WORKER_UPDATER_PATH =
+          "push/onesignal/OneSignalSDKUpdaterWorker.js";
+        OneSignal.init(initConfig);
+      });
+    </script>
 
     <title>Ynov Dev Web Mobile</title>
   </head>

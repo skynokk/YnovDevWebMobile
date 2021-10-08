@@ -41,6 +41,25 @@ const fetchSW = (event) => {
 
 /*********************************** */
 
+/** Activate */
+
+const waitUntilActivatePromise = () =>
+  new Promise((resolve) => {
+    // Enable navigation preload if it's supported.
+    // See https://developers.google.com/web/updates/2017/02/navigation-preload
+    if ("navigationPreload" in self.registration) {
+      self.registration.navigationPreload.enable().finally(resolve);
+    }
+  });
+
+const activate = (event) => {
+  event.waitUntil(waitUntilActivatePromise());
+  // Tell the active service worker to take control of the page immediately.
+  self.clients.claim();
+};
+
+/*********************************** */
+
 /** Install */
 const waitUntilInstallationPromise = () =>
   new Promise((resolve) => {
@@ -51,7 +70,6 @@ const waitUntilInstallationPromise = () =>
 
 const installSW = (event) => {
   event.waitUntil(waitUntilInstallationPromise());
-
   // Force the waiting service worker to become the active service worker.
   self.skipWaiting();
 };
@@ -59,5 +77,5 @@ const installSW = (event) => {
 
 /** INIT */
 self.addEventListener("install", installSW);
-
+self.addEventListener("activate", activate);
 self.addEventListener("fetch", fetchSW);

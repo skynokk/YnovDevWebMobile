@@ -33,6 +33,7 @@ body {
 }
 
 main {
+  height: 100%;
   background-color: #f8c291;
   color: white;
 }

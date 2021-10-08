@@ -1,7 +1,7 @@
 {
   "name": " Ynov Dev Web Mobile",
   "short_name": "Top Manga",
-  "start_url": "/www/index.html",
+  "start_url": "/",
   "display": "standalone",
   "theme_color": "#ffff",
   "icons": [

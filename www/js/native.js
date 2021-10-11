@@ -9,6 +9,5 @@ const openInAppBrowser = (link) => {
 };
 
 const deviceReady = () => {
-  alert("deviceReady");
   window.addEventListener("batterystatus", onBatteryStatus, false);
 };

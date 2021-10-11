@@ -22,7 +22,7 @@ body {
     env(safe-area-inset-bottom, 0px) env(safe-area-inset-right, 0px);
   text-transform: uppercase;
   width: 100%;
-  background-color: #f8c291;
+  background-color: #f8c291 !important;
 }
 
 /* Portrait layout (default) */
@@ -46,7 +46,7 @@ main h1 {
   margin-bottom: 10px;
   /* width: 80%; */
 }
-#list a {
+#list {
   color: black;
   text-decoration: none;
 }

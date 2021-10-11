@@ -34,8 +34,29 @@ const fetchApiDone = (json) => {
   });
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-  fetch("api/mangas.json").then((response) =>
+const fetchLocal = (url) => {
+  return new Promise(function (resolve, reject) {
+    const xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+      resolve(new Response(xhr.response, { status: xhr.status }));
+    };
+    xhr.onerror = function () {
+      reject(new TypeError("Local request failed"));
+    };
+    xhr.open("GET", url);
+    xhr.responseType = "arraybuffer";
+    xhr.send(null);
+  });
+};
+
+const fetchApiMangas = () => {
+  fetchLocal("api/mangas.json").then((response) =>
     response.json().then(fetchApiDone)
   );
-});
+};
+
+if ("cordova" in window) {
+  document.addEventListener("deviceready", fetchApiMangas);
+} else {
+  document.addEventListener("DOMContentLoaded", fetchApiMangas);
+}

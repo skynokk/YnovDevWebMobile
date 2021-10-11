@@ -16,11 +16,26 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <icon src="www/img/logo.png" />
+    <preference name="AutoHideSplashScreen" value="true" /> 
+    <preference name="SplashScreenDelay" value="3000" /> 
+    <preference name="SplashScreenBackgroundColor" value="0xFFFFFFFF" />
     <platform name="android">
+        <preference name="AndroidPersistentFileLocation" value="Compatibility" />
         <allow-intent href="market:*" />
+        <splash src="www/img/logos/splash-hdpi.png" density="hdpi" />
+        <splash src="www/img/logos/splash-ldpi.png" density="ldpi" />
+        <splash src="www/img/logos/splash-mdpi.png" density="mdpi" />
+        <splash src="www/img/logos/splash-xhdpi.png" density="xhdpi" />
+        <splash src="www/img/logos/splash-xxhdpi.png" density="xxhdpi" />
+        <splash src="www/img/logos/splash-xxxhdpi.png" density="xxxhdpi" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
+    </platform>
+    <platform name="browser">
+        <preference name="SplashScreen" value="www/img/logos/144x144.png" /> 
+        
     </platform>
 </widget>

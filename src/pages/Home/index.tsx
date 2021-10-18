@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   IonAvatar,
   IonButtons,
@@ -14,6 +14,8 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
+import { StatusBar } from "@ionic-native/status-bar";
+
 import { useTopList } from "../../hooks";
 import { TopItem } from "../../types";
 import "./home.css";
@@ -23,7 +25,18 @@ const findFirstImgFromItems = (items: TopItem[]): string | undefined =>
   items.find((item) => item.img !== undefined)?.img;
 
 const Home = () => {
-  const { list } = useTopList();
+  const { list, init } = useTopList();
+
+  useEffect(() => {
+    StatusBar.overlaysWebView(false);
+    StatusBar.styleDefault();
+    StatusBar.backgroundColorByHexString("#f7f1e3");
+  }, []);
+
+  useEffect(() => {
+    init();
+  }, [init]);
+
   return (
     <IonPage>
       <IonHeader>

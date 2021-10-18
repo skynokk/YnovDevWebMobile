@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { NativeStorage } from "@ionic-native/native-storage";
 
 const useDatabase = () => {
-  const mobileWeb = isPlatform("mobileweb");
+  const mobileWeb = true; //isPlatform("mobileweb");
   const setItem = useCallback(
     <T = any>(key: string, value: T): Promise<T> => {
       if (mobileWeb) {

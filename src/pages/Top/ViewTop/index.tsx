@@ -1,4 +1,5 @@
 import {
+  IonButton,
   IonButtons,
   IonCard,
   IonCardContent,
@@ -8,6 +9,7 @@ import {
   IonContent,
   IonGrid,
   IonHeader,
+  IonIcon,
   IonMenuButton,
   IonPage,
   IonRow,
@@ -17,8 +19,11 @@ import {
 import React, { useState, useEffect } from "react";
 import { RouteComponentProps } from "react-router";
 import { InAppBrowser } from "@ionic-native/in-app-browser";
+import { SocialSharing } from "@ionic-native/social-sharing";
+
 import { useTopList } from "../../../hooks";
 import { Top } from "../../../types";
+import { shareSocialOutline } from "ionicons/icons";
 
 type ViewTopProps = RouteComponentProps<{
   title: string;
@@ -28,13 +33,21 @@ const ViewTop: React.FC<ViewTopProps> = ({ match }) => {
   const {
     params: { title },
   } = match;
-  const { findTopByTitle } = useTopList();
+  const { getLists, findTopByTitle } = useTopList();
   const [top, setTop] = useState<Top | undefined>();
 
   const openLink = (link?: string) => {
     if (!link) return;
     InAppBrowser.create(link, "_blank");
   };
+
+  const shareOnclick = () => {
+    SocialSharing.share("Message", "Subject");
+  };
+
+  useEffect(() => {
+    getLists(); //.then(() => setTop(findTopByTitle(title)));
+  }, [getLists]);
 
   useEffect(() => {
     setTop(findTopByTitle(title));
@@ -66,6 +79,11 @@ const ViewTop: React.FC<ViewTopProps> = ({ match }) => {
         <IonToolbar>
           <IonButtons slot="start">
             <IonMenuButton />
+          </IonButtons>
+          <IonButtons slot="secondary">
+            <IonButton onClick={shareOnclick}>
+              <IonIcon slot="icon-only" icon={shareSocialOutline} />
+            </IonButton>
           </IonButtons>
           <IonTitle>Liste des top</IonTitle>
         </IonToolbar>

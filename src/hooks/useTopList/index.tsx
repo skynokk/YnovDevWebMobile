@@ -10,10 +10,11 @@ const useTopList = () => {
 
   const pushTop = (top: Top) => setList(Array.from(list.concat(top)));
   const createList = (l: List) => setList(Array.from(list.concat(l)));
+  const findTopByTitle = (title: string) => list.find((l) => l.title === title);
 
   useEffect(() => {
     getItem<List>(key).then((l) => {
-      if (l) {
+      if (l && l.length > 0) {
         setList(l);
       } else {
         setList(defaultList);
@@ -25,12 +26,11 @@ const useTopList = () => {
     setItem(key, list);
   }, [list, setItem]);
 
-  console.log(list);
-
   return {
     list,
     pushTop,
     createList,
+    findTopByTitle,
   };
 };
 

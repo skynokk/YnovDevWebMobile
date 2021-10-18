@@ -1,0 +1,71 @@
+#homePage {
+  --padding-top: 10px;
+  --padding-start: 10px;
+  --padding-end: 10px;
+}
+#homePage ion-list ion-label {
+  margin-left: 10px;
+}
+#homePage ion-list {
+  padding-bottom: 100px;
+  border: 1px solid #d3d3d3;
+  border-radius: 10px;
+  background-color: var(--list-top-background-color);
+}
+#homePage ion-list ion-item {
+  --background: var(--list-top-background-color);
+}
+#homePage ion-list ion-item.odd {
+  --background: white;
+}
+ion-item {
+  --inner-border-width: 0;
+}
+/* ion-content#homePage::part(background),
+ion-content#homePage ion-list {
+  background-color: var(--list-top-background-color) !important;
+  --background-color: var(--list-top-background-color) !important;
+} */
+/* 
+ion-content#homePage {
+  background-color: var(--list-top-background-color);
+  --background-color: var(--list-top-background-color);
+}
+#background-content {
+}
+ion-content.wrapper {
+  background-color: var(--list-top-background-color);
+  --background-color: var(--list-top-background-color);
+}
+
+#homePage ion-list ion-item::part(native) {
+  --background: var(--ion-color-primary);
+  background: var(--ion-color-primary);
+  color: white;
+}
+
+#homePage ion-list ion-item.even::part(native) {
+  --background: var(--ion-color-light);
+  background: var(--ion-color-light);
+  color: black;
+}
+
+
+
+ion-content#homePage,
+ion-content#homePage ion-list {
+  background-color: var(--list-top-background-color) !important;
+  --background-color: var(--list-top-background-color) !important;
+}
+
+#homePage ion-list ion-item {
+  --background: var(--ion-color-primary);
+  background: var(--ion-color-primary);
+  color: white;
+}
+
+#homePage ion-list ion-item.even {
+  --background: var(--ion-color-light);
+  background: var(--ion-color-light);
+  color: black;
+} */

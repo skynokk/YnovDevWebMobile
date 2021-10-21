@@ -8,8 +8,8 @@ const OFFLINE_URL = "offline.html";
 
 const respondWithFetchPromiseNavigate = (event) =>
   new Promise((resolve) => {
-    event.preloadResponse.then(() => {
-      event.preloadResponse.then((preloadResponse) => {
+    event.preloadResponse
+      .then((preloadResponse) => {
         if (preloadResponse) {
           resolve(preloadResponse);
         }
@@ -27,8 +27,14 @@ const respondWithFetchPromiseNavigate = (event) =>
               });
             });
           });
+      })
+      .catch(() => {
+        caches.open(CACHE_NAME).then((cache) => {
+          cache.match(OFFLINE_URL).then((cachedResponse) => {
+            resolve(cachedResponse);
+          });
+        });
       });
-    });
   });
 
 const fetchSW = (event) => {

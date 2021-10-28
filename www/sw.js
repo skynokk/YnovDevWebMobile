@@ -1,13 +1,13 @@
 /** VARS */
 const ORIGIN_URL = `${location.protocol}//${location.host}`;
-const CACHE_NAME = "offline-v3";
-const OFFLINE_URL = "offline.html";
+const CACHE_NAME = "offline-v5";
+const OFFLINE_URL = `${ORIGIN_URL}/offline.html`;
 const CACHED_FILES = [
   OFFLINE_URL,
   "https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css",
   "https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js",
-  `${ORIGIN_URL}/css/index.css`,
-  `${ORIGIN_URL}/js/index.js`,
+  `${ORIGIN_URL}/css/fichier.css`,
+  `${ORIGIN_URL}/js/fichier.js`,
   `${ORIGIN_URL}/img/logo.png`,
 ];
 /** FUNCTIONS */
@@ -90,7 +90,11 @@ const activate = (event) => {
 const waitUntilInstallationPromise = () =>
   new Promise((resolve) => {
     caches.open(CACHE_NAME).then((cache) => {
-      cache.addAll(CACHED_FILES).then(resolve);
+      console.log("i'm here", CACHED_FILES);
+      cache
+        .addAll(CACHED_FILES)
+        .then(resolve)
+        .catch((err) => console.log(err));
     });
   });
 

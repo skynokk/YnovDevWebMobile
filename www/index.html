@@ -38,7 +38,7 @@
       window.addEventListener("load", () => {
         if ("serviceWorker" in navigator) {
           navigator.serviceWorker
-            .register("sw.js", { scope: "./" })
+            .register("./sw.js", { scope: "./" })
             .then(function (reg) {});
         }
       });
@@ -49,7 +49,7 @@
       name="viewport"
       content="initial-scale=1, width=device-width, viewport-fit=cover"
     />
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="./css/fichier.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -68,7 +68,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="#"
-          ><img src="img/logo.png" />Ynov Dev Web Mobile</a
+          ><img src="./img/logo.png" />Ynov Dev Web Mobile</a
         >
       </div>
     </nav>
@@ -81,7 +81,7 @@
       <div class="row" id="list"></div>
     </main>
     <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript" src="js/mangas.js"></script>
+    <script type="text/javascript" src="./js/fichier.js"></script>
+    <script type="text/javascript" src="./js/mangas.js"></script>
   </body>
 </html>

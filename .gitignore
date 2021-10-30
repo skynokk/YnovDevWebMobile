@@ -27,4 +27,11 @@ yarn-error.log*
 # Optional eslint cache
 .eslintcache
 
-android/
+!android/
+android/*
+
+!android/icon-background.png
+!android/icon-foreground.png
+
+resources/android/icon
+resources/android/splash

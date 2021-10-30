@@ -1,43 +1,36 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { useDatabase } from "..";
+import { useDatabase, useFirebaseDatabase } from "..";
 import { defaultList, List, Top } from "../../types";
 
 const key = "list";
 
 const useTopList = () => {
   const [list, setList] = useState<List>([]);
-  const { setItem, getItem } = useDatabase();
+  const { saveList, getList } = useFirebaseDatabase();
 
   const init = useCallback(
     () =>
-      getItem<List>(key).then((l) => {
+      getList().then((l) => {
         if (l && l.length > 0) {
           setList(l);
         } else {
-          setList(defaultList);
+          saveList(defaultList).then(() => setList(defaultList));
         }
       }),
-    [getItem]
+    [getList, saveList]
   );
   const getLists = useCallback(
     () =>
-      new Promise<void>((resolve, reject) => {
-        getItem<List>(key)
-          .then((l) => {
-            if (l && l.length > 0) {
-              setList(l);
-              resolve();
-            } else {
-              reject();
-            }
-          })
-          .catch(reject);
+      getList().then((l) => {
+        setList(l);
       }),
-    [getItem]
+    [getList]
   );
 
-  const pushTop = (top: Top) => setList(Array.from(list.concat(top)));
-  const createList = (l: List) => setList(Array.from(list.concat(l)));
+  const pushTop = (top: Top): Promise<any> => {
+    const newList = Array.from(list.concat(top));
+    return saveList(newList).then(() => setList(newList));
+  };
   const findTopByTitle = useCallback(
     (title: string) => list.find((l) => l.title === title),
     [list]
@@ -47,14 +40,11 @@ const useTopList = () => {
     getLists();
   }, [getLists]);
 
-  useEffect(() => {
-    setItem(key, list).catch((error) => console.error(error));
-  }, [list, setItem]);
+  console.log("list::", list);
 
   return {
     list,
     pushTop,
-    createList,
     findTopByTitle,
     init,
     getLists,

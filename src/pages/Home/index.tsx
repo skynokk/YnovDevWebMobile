@@ -13,6 +13,7 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
+  useIonViewDidEnter,
 } from "@ionic/react";
 import { StatusBar } from "@ionic-native/status-bar";
 
@@ -27,15 +28,15 @@ const findFirstImgFromItems = (items: TopItem[]): string | undefined =>
 const Home = () => {
   const { list, init } = useTopList();
 
+  useIonViewDidEnter(() => {
+    init();
+  });
+
   useEffect(() => {
     StatusBar.overlaysWebView(false);
     StatusBar.styleDefault();
     StatusBar.backgroundColorByHexString("#f7f1e3");
   }, []);
-
-  useEffect(() => {
-    init();
-  }, [init]);
 
   return (
     <IonPage>

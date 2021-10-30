@@ -13,6 +13,7 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
+  useIonViewDidEnter,
 } from "@ionic/react";
 import { StatusBar } from "@ionic-native/status-bar";
 
@@ -25,7 +26,7 @@ const findFirstImgFromItems = (items: TopItem[]): string | undefined =>
   items.find((item) => item.img !== undefined)?.img;
 
 const Home = () => {
-  const { list, init } = useTopList();
+  const { list, getLists } = useTopList();
 
   useEffect(() => {
     StatusBar.overlaysWebView(false);
@@ -33,9 +34,9 @@ const Home = () => {
     StatusBar.backgroundColorByHexString("#f7f1e3");
   }, []);
 
-  useEffect(() => {
-    init();
-  }, [init]);
+  useIonViewDidEnter(() => {
+    getLists();
+  });
 
   return (
     <IonPage>

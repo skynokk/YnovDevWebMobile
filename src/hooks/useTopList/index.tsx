@@ -19,6 +19,7 @@ const useTopList = () => {
       }),
     [getItem]
   );
+
   const getLists = useCallback(
     () =>
       new Promise<void>((resolve, reject) => {
@@ -44,8 +45,8 @@ const useTopList = () => {
   );
 
   useEffect(() => {
-    getLists();
-  }, [getLists]);
+    init();
+  }, [init]);
 
   useEffect(() => {
     setItem(key, list).catch((error) => console.error(error));

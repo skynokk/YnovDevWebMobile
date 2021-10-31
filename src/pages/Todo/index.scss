@@ -1,0 +1,33 @@
+#todo-page {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  .todo-page-form-content {
+    display: flex;
+    :first-child {
+      flex-basis: 80%;
+      margin-right: 5%;
+    }
+    margin-bottom: 40px;
+  }
+  .todo-page-list {
+    list-style: none;
+    margin: 0;
+    padding: 10px;
+    border: 1px solid var(--tertiary);
+    border-radius: 10px;
+    li {
+      display: flex;
+      padding: 15px;
+      margin: 15px;
+      -webkit-box-shadow: 0px 0px 15px 5px #dfdfdf;
+      box-shadow: 0px 0px 15px 5px #dfdfdf;
+      border-radius: 10px;
+      > span {
+        &:first-child {
+          flex-basis: 90%;
+        }
+      }
+    }
+  }
+}

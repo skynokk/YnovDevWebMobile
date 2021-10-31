@@ -1,0 +1,14 @@
+.create-todo-form-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50%;
+  > div {
+    margin-bottom: 10px;
+    &:first-child {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

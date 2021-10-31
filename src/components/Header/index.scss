@@ -1,0 +1,20 @@
+.header {
+  width: 100%;
+  display: flex;
+  padding: 20px;
+  background: var(--primary);
+  color: var(--secondary);
+  -webkit-box-shadow: 0px 10px 15px -8px rgba(0, 0, 0, 0.4);
+  box-shadow: 0px 10px 15px -8px rgba(0, 0, 0, 0.4);
+  &.withBtn {
+  }
+  button {
+    margin-right: 10px;
+    padding: 0 !important;
+  }
+  h1 {
+    margin: 0;
+    font-size: 1.3rem;
+  }
+  margin-bottom: 10px;
+}

@@ -10,28 +10,50 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { logoGoogle } from "ionicons/icons";
+import { logIn, logoGoogle } from "ionicons/icons";
+import { useState } from "react";
 import { useFirebaseLogin } from "../../hooks";
+import "./index.scss";
 
 const Connection = () => {
-  const { connectionWithGoogle } = useFirebaseLogin();
+  const { connectEmailPassword } = useFirebaseLogin();
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Connexion</IonTitle>
-        </IonToolbar>
-      </IonHeader>
       <IonContent id="connectionPage">
         <IonGrid>
           <IonRow>
             <IonCol>
-              <IonButton color="primary" onClick={() => connectionWithGoogle()}>
-                Connexion avec Google
-                <IonIcon slot="end" icon={logoGoogle} />
-              </IonButton>
+              <h1>
+                Connexion <IonIcon icon={logIn} />
+              </h1>
             </IonCol>
+          </IonRow>
+          <IonRow>
+            <input
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              type="email"
+              placeholder="Email"
+            />
+          </IonRow>
+          <IonRow>
+            <input
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type="password"
+              placeholder="Mot de passe"
+            />
+          </IonRow>
+          <IonRow>
+            <IonButton
+              color="tertiary"
+              onClick={() => connectEmailPassword(email, password)}
+            >
+              Valider
+            </IonButton>
           </IonRow>
         </IonGrid>
       </IonContent>

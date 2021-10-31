@@ -33,7 +33,7 @@ const ViewTop: React.FC<ViewTopProps> = ({ match }) => {
   const {
     params: { title },
   } = match;
-  const { getLists, findTopByTitle } = useTopList();
+  const { findTopByTitle } = useTopList();
   const [top, setTop] = useState<Top | undefined>();
 
   const openLink = (link?: string) => {
@@ -44,10 +44,6 @@ const ViewTop: React.FC<ViewTopProps> = ({ match }) => {
   const shareOnclick = () => {
     SocialSharing.share("Message", "Subject");
   };
-
-  useEffect(() => {
-    getLists(); //.then(() => setTop(findTopByTitle(title)));
-  }, [getLists]);
 
   useEffect(() => {
     setTop(findTopByTitle(title));

@@ -2,7 +2,8 @@ import { IonApp, IonRouterOutlet, IonSplitPane } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import { Route } from "react-router-dom";
 import { initializeApp } from "firebase/app";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { SplashScreen } from "@capacitor/splash-screen";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -23,7 +24,7 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import "./theme/variables.css";
 import "./theme/listTopTheme.css";
-import { CreateTop, Home, ViewTop, Connection } from "./pages";
+import { CreateTop, Home, ViewTop, Connection, LoadingPage } from "./pages";
 import { Menu } from "./components";
 import { useFirebaseLogin } from "./hooks";
 
@@ -38,9 +39,18 @@ const firebaseConfig = {
 
 const App: React.FC = () => {
   const { user, checkAuth } = useFirebaseLogin();
+  const [loading, setLoading] = useState<boolean>(true);
+  // useEffect(() => {
+  //   SplashScreen.show({
+  //     autoHide: false,
+  //   });
+  // }, []);
   useEffect(() => {
     initializeApp(firebaseConfig);
-    checkAuth();
+    checkAuth().then(() => {
+      setLoading(false);
+      SplashScreen.hide();
+    });
   }, [checkAuth]);
   console.log(`IONIC::::`, user);
   return (
@@ -52,7 +62,9 @@ const App: React.FC = () => {
             <Route
               path="/"
               exact
-              render={(_props) => (user ? <Home /> : <Connection />)}
+              render={(_props) =>
+                loading ? <LoadingPage /> : user ? <Home /> : <Connection />
+              }
             />
             <Route path="/create" exact component={CreateTop} />
             <Route path="/view/:title" exact component={ViewTop} />

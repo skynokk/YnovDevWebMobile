@@ -1,4 +1,5 @@
 import {
+  IonButton,
   IonContent,
   IonIcon,
   IonItem,
@@ -11,23 +12,9 @@ import {
 } from "@ionic/react";
 
 import { useLocation } from "react-router-dom";
-import {
-  add,
-  archiveOutline,
-  archiveSharp,
-  heartOutline,
-  heartSharp,
-  list,
-  mailOutline,
-  mailSharp,
-  paperPlaneOutline,
-  paperPlaneSharp,
-  trashOutline,
-  trashSharp,
-  warningOutline,
-  warningSharp,
-} from "ionicons/icons";
+import { add, list, logOut } from "ionicons/icons";
 import "./Menu.css";
+import { useFirebaseLogin } from "../../hooks";
 
 interface AppPage {
   url: string;
@@ -53,6 +40,7 @@ const appPages: AppPage[] = [
 
 const Menu: React.FC = () => {
   const location = useLocation();
+  const { logout } = useFirebaseLogin();
 
   return (
     <IonMenu contentId="main" type="overlay">
@@ -83,6 +71,9 @@ const Menu: React.FC = () => {
             );
           })}
         </IonList>
+        <IonButton color="danger" expand="full" onClick={() => logout()}>
+          Déconnexion <IonIcon slot="end" icon={logOut} />
+        </IonButton>
       </IonContent>
     </IonMenu>
   );

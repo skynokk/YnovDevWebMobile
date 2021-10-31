@@ -1,0 +1,21 @@
+#connectionPage {
+  ion-grid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    ion-row {
+      margin-bottom: 20px;
+      h1 {
+        color: var(--ion-color-primary);
+        font-size: 2rem;
+      }
+      input {
+        border: 1px solid grey;
+        border-radius: 10px;
+        padding: 10px;
+      }
+    }
+  }
+}

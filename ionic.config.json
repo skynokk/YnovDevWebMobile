@@ -1,0 +1,7 @@
+{
+  "name": "poker",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

@@ -1,0 +1,7 @@
+ion-header ion-toolbar {
+  --background: var(--ion-color-primary);
+}
+ion-content {
+  --background: var(--ion-color-light);
+  --color: var(--ion-color-dark);
+}

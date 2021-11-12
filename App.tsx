@@ -12,6 +12,17 @@ import Detail from "./pages/Detail";
 
 const Stack = createNativeStackNavigator();
 
+const config = {
+  screens: {
+    detail: "detail/:id",
+  },
+};
+
+const linking = {
+  prefixes: ["http://localhost:19006/", "https://mychat.com", "mychat://"],
+  config,
+};
+
 export default function App() {
   useEffect(() => {
     SplashScreen.preventAutoHideAsync();
@@ -19,10 +30,10 @@ export default function App() {
   }, []);
 
   return (
-    <NavigationContainer>
+    <NavigationContainer linking={linking}>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Detail" component={Detail} />
+        <Stack.Screen name="home" component={Home} initialParams={{}} />
+        <Stack.Screen name="detail" component={Detail} />
       </Stack.Navigator>
       <StatusBar style="light" backgroundColor="#000000" />
     </NavigationContainer>

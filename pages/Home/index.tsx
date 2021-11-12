@@ -1,78 +1,54 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
-import * as ImagePicker from "expo-image-picker";
-import * as Sharing from "expo-sharing";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableWithoutFeedback,
+  ScrollView,
+  StatusBar,
+} from "react-native";
+import mangas from "../../mangas";
 
-import logo from "./assets/icon.png";
+const CardContent = ({ manga, i }: any) => (
+  <React.Fragment>
+    <Image source={{ uri: manga.img }} style={styles.cardImg} />
+    <Text style={styles.cardTxt}>
+      #{i + 1} {manga.name}
+    </Text>
+  </React.Fragment>
+);
 
 const Home = ({ navigation }: any) => {
-  const [selectedImage, setSelectedImage] = useState<null | {
-    localUri: string;
-  }>(null);
-
-  const openImagePickerAsync = () => {
-    ImagePicker.requestMediaLibraryPermissionsAsync().then((grantedStatus) => {
-      if (grantedStatus.granted) {
-        ImagePicker.launchImageLibraryAsync().then((pickerResult) => {
-          console.log(pickerResult);
-          const { cancelled } = pickerResult;
-          if (cancelled) return;
-
-          setSelectedImage({ localUri: pickerResult.uri });
-        });
-      }
-    });
-  };
-  const openShareDialogAsync = () => {
-    Sharing.isAvailableAsync().then((result) => {
-      console.log(result);
-      if (selectedImage) {
-        Sharing.shareAsync(selectedImage.localUri);
-      }
-    });
-  };
-
   return (
     <View style={styles.container}>
-      {selectedImage ? (
-        <Image
-          source={{
-            uri: selectedImage.localUri,
-          }}
-          style={styles.img}
-        />
-      ) : (
-        <Image
-          source={{
-            uri: "https://i.imgur.com/TkIrScD.png",
-          }}
-          style={styles.img}
-        />
-      )}
-
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <TouchableOpacity onPress={openImagePickerAsync} style={styles.btn}>
-        <Text style={styles.btnText}>Pick a photo</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={openShareDialogAsync} style={styles.btn}>
-        <Text style={styles.btnText}>Share</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("Detail")}
-        style={styles.btn}
-      >
-        <Text style={styles.btnText}>Open Detail</Text>
-      </TouchableOpacity>
+      <ScrollView style={styles.scrollContainer}>
+        {mangas.map((manga, i) => (
+          <TouchableWithoutFeedback
+            key={i}
+            onPress={() => {
+              navigation.navigate("detail", { id: i });
+            }}
+          >
+            <View style={styles.card}>
+              <CardContent manga={manga} i={i} />
+            </View>
+          </TouchableWithoutFeedback>
+        ))}
+      </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: "#f8c291",
+  },
+  scrollContainer: {
+    marginTop: StatusBar.currentHeight || 10,
+    marginBottom: 20,
+    paddingRight: 20,
+    paddingLeft: 20,
   },
   img: {
     width: 305,
@@ -88,6 +64,31 @@ const styles = StyleSheet.create({
   },
   btnText: {
     color: "#fff",
+  },
+  card: {
+    borderRadius: 15,
+    marginBottom: 10,
+    backgroundColor: "white",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  cardImg: {
+    height: 159,
+    borderRadius: 15,
+    marginBottom: 10,
+    borderBottomEndRadius: 0,
+    borderBottomStartRadius: 0,
+  },
+  cardTxt: {
+    margin: 10,
+    fontSize: 18,
+    fontWeight: "bold",
   },
 });
 

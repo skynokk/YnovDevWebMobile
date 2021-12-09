@@ -1,0 +1,43 @@
+{
+    "name": "Appli Jean",
+    "short_name": "APP JEAN",
+    "start_url": "./?utm_source=web_app_manifest",
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "img/logo.png",
+            "sizes": "50x50",
+            "type": "image/png"
+        },
+        {
+            "src": "img/logos/144x144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        },
+        {
+            "src": "img/mangas/fatestaynight.png",
+            "sizes": "342x432",
+            "type": "image/png"
+        },
+        {
+            "src": "img/mangas/fullmetalalchemist.png",
+            "sizes": "1098x1500",
+            "type": "image/png"
+        },
+        {
+            "src": "img/mangas/hunterhunter.png",
+            "sizes": "1356x2067",
+            "type": "image/png"
+        },
+        {
+            "src": "img/mangas/lattaquedestitans.png",
+            "sizes": "400x600",
+            "type": "image/png"
+        },
+        {
+            "src": "img/mangas/onepiece.png",
+            "sizes": "600x856",
+            "type": "image/png"
+        }
+    ]
+}
